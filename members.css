@@ -1,0 +1,293 @@
+/* ─── ADD MEMBER BUTTON ─── */
+.topbar button {
+  padding: 11px 22px;
+  border-radius: 10px;
+  background: linear-gradient(
+    135deg,
+    rgba(139, 92, 246, 0.5),
+    rgba(167, 139, 250, 0.35)
+  );
+  border: 1px solid rgba(167, 139, 250, 0.55);
+  color: rgba(220, 210, 255, 0.95);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(139, 92, 246, 0.25);
+}
+
+.topbar button:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(139, 92, 246, 0.65),
+    rgba(167, 139, 250, 0.5)
+  );
+  border-color: rgba(167, 139, 250, 0.75);
+  box-shadow: 0 6px 28px rgba(139, 92, 246, 0.4);
+  transform: translateY(-1px);
+}
+
+/* ─── ACTIVITY SECTION WRAPPER ─── */
+.activity-section {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(180, 160, 255, 0.12);
+  border-radius: 20px;
+  padding: 28px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: 0 0 60px rgba(120, 80, 255, 0.06);
+}
+
+/* ─── SECTION HEADER ─── */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.section-header h2 {
+  font-size: 17px;
+  font-weight: 700;
+  color: rgba(220, 210, 255, 0.95);
+  letter-spacing: -0.2px;
+}
+
+.section-header span {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(200, 185, 255, 0.6);
+  background: rgba(167, 139, 250, 0.1);
+  border: 1px solid rgba(167, 139, 250, 0.25);
+  padding: 5px 14px;
+  border-radius: 20px;
+  letter-spacing: 0.3px;
+}
+
+/* ─── SEARCH INPUT ─── */
+.activity-section > input[type="text"] {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 13px 16px;
+  color: white;
+  font-size: 14px;
+  font-family: "Segoe UI", sans-serif;
+  outline: none;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.activity-section > input[type="text"]::placeholder {
+  color: rgba(255, 255, 255, 0.22);
+}
+
+.activity-section > input[type="text"]:focus {
+  border-color: rgba(167, 139, 250, 0.45);
+  background: rgba(167, 139, 250, 0.05);
+  box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.07);
+}
+
+/* ─── MEMBER CARD ─── */
+.member-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 22px;
+  border-radius: 14px;
+  border: 1px solid rgba(180, 160, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.member-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 15%;
+  bottom: 15%;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: linear-gradient(180deg, #a78bfa, #7c3aed);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.member-card:hover {
+  background: rgba(167, 139, 250, 0.07);
+  border-color: rgba(167, 139, 250, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(139, 92, 246, 0.12);
+}
+
+.member-card:hover::before {
+  opacity: 1;
+}
+
+/* ─── CARD SIDES ─── */
+.members-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* ← increase this for more space between cards */
+}
+
+.member-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px; /* ← increase padding to make cards bigger */
+  border-radius: 12px;
+}
+.member-card-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.member-card-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* ─── MEMBER INFO ─── */
+.member-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 20px;
+}
+
+.member-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(240, 235, 255, 0.95);
+  letter-spacing: -0.1px;
+}
+
+.member-email {
+  font-size: 13px;
+  color: rgba(200, 185, 255, 0.5);
+}
+
+/* ─── ROLE BADGE ─── */
+.role-badge {
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.role-badge.viewer {
+  background: rgba(59, 130, 246, 0.15);
+  color: #93c5fd;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.12);
+}
+
+.role-badge.supervisor {
+  background: rgba(139, 92, 246, 0.2);
+  color: #c4b5fd;
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.15);
+}
+
+.role-badge.operator {
+  background: rgba(34, 197, 94, 0.15);
+  color: #86efac;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.12);
+}
+
+/* ─── REMOVE BUTTON ─── */
+.btn-remove {
+  padding: 8px 16px;
+  border-radius: 9px;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.28);
+  color: rgba(252, 165, 165, 0.85);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn-remove:hover {
+  background: rgba(239, 68, 68, 0.22);
+  border-color: rgba(239, 68, 68, 0.55);
+  color: #fff;
+  box-shadow: 0 0 18px rgba(239, 68, 68, 0.2);
+  transform: translateY(-1px);
+}
+
+/* ─── CONFIRM ACTIONS ─── */
+.confirm-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-confirm-yes {
+  padding: 8px 16px;
+  border-radius: 9px;
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.5);
+  color: #fca5a5;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-confirm-yes:hover {
+  background: rgba(239, 68, 68, 0.35);
+  color: #fff;
+}
+
+.btn-confirm-yes:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-confirm-no {
+  padding: 8px 14px;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-confirm-no:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+/* ─── LOADING / ERROR ─── */
+.activity-section > p {
+  color: rgba(200, 185, 255, 0.45);
+  font-size: 14px;
+  text-align: center;
+  padding: 24px 0;
+}
+
+/* ─── EMPTY STATE ─── */
+.empty-msg {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.35);
+  margin-top: 50px;
+  font-size: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}

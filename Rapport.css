@@ -1,0 +1,680 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  font-family: "Segoe UI", sans-serif;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, #13014c 0%, #0a0128 50%, #02000a 100%);
+  z-index: -1;
+}
+
+.dashboard {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 30px 40px;
+  gap: 30px;
+  overflow-y: auto;
+}
+/* ── Toast ── */
+.kpi-toast {
+  position: fixed;
+  top: 24px;
+  right: 28px;
+  z-index: 999;
+  padding: 14px 22px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  animation: toastIn 0.3s ease;
+}
+
+.kpi-toast.success {
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.4);
+  color: #6ee7b7;
+  box-shadow: 0 0 30px rgba(34, 197, 94, 0.15);
+}
+
+.kpi-toast.error {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #fca5a5;
+  box-shadow: 0 0 30px rgba(239, 68, 68, 0.15);
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Inline Delete Confirm ── */
+.rapport-confirm {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.btn-confirm-yes {
+  padding: 7px 14px;
+  border-radius: 8px;
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.5);
+  color: #fca5a5;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-confirm-yes:hover { background: rgba(239, 68, 68, 0.35); color: #fff; }
+
+.btn-confirm-no {
+  padding: 7px 14px;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-confirm-no:hover { border-color: rgba(255, 255, 255, 0.3); color: white; }
+
+/* ─── TOPBAR ─── */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.topbar-title h1 {
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  background: linear-gradient(90deg, #ffffff 30%, #c4b5fd 100%);
+  -webkit-background-clip : text;
+  -webkit-text-fill-color: transparent;
+}
+
+.topbar-title p {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(180, 160, 255, 0.2);
+  border: 1px solid rgba(180, 160, 255, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(180, 160, 255, 0.9);
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.back-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* ─── FILTER TABS ─── */
+.filter-tabs {
+  display: flex;
+  gap: 10px;
+}
+
+.filter-btn {
+  padding: 11px 22px;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid rgba(167, 139, 250, 0.2);
+  color: rgba(210, 195, 255, 0.6);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(139, 92, 246, 0.4),
+    rgba(167, 139, 250, 0.25)
+  );
+  border-color: rgba(167, 139, 250, 0.45);
+  color: rgba(220, 210, 255, 0.95);
+  box-shadow: 0 6px 28px rgba(139, 92, 246, 0.3);
+  transform: translateY(-1px);
+}
+
+.filter-btn.active {
+  background: linear-gradient(
+    135deg,
+    rgba(139, 92, 246, 0.4),
+    rgba(167, 139, 250, 0.25)
+  );
+  border: 1px solid rgba(167, 139, 250, 0.45);
+  color: rgba(220, 210, 255, 0.95);
+  box-shadow: 0 4px 20px rgba(139, 92, 246, 0.15);
+}
+
+/* ─── REPORT LIST ─── */
+.rapport-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ─── RAPPORT CARD ─── */
+.rapport-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 18px;
+  padding: 22px 28px;
+  transition: all 0.35s ease;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid transparent;
+}
+
+.rapport-card.published {
+  background: linear-gradient(
+    135deg,
+    rgba(34, 197, 94, 0.15) 0%,
+    rgba(16, 185, 129, 0.08) 100%
+  );
+  border-color: rgba(34, 197, 94, 0.35);
+  box-shadow:
+    0 4px 28px rgba(34, 197, 94, 0.12),
+    inset 0 1px 0 rgba(74, 222, 128, 0.1);
+}
+
+.rapport-card.published:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(34, 197, 94, 0.22) 0%,
+    rgba(16, 185, 129, 0.14) 100%
+  );
+  border-color: rgba(34, 197, 94, 0.55);
+  box-shadow:
+    0 12px 48px rgba(34, 197, 94, 0.22),
+    inset 0 1px 0 rgba(74, 222, 128, 0.15);
+  transform: translateY(-3px);
+}
+
+.rapport-card.draft {
+  background: linear-gradient(
+    135deg,
+    rgba(251, 191, 36, 0.15) 0%,
+    rgba(245, 158, 11, 0.08) 100%
+  );
+  border-color: rgba(251, 191, 36, 0.35);
+  box-shadow:
+    0 4px 28px rgba(251, 191, 36, 0.12),
+    inset 0 1px 0 rgba(252, 211, 77, 0.1);
+}
+
+.rapport-card.draft:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(251, 191, 36, 0.22) 0%,
+    rgba(245, 158, 11, 0.14) 100%
+  );
+  border-color: rgba(251, 191, 36, 0.55);
+  box-shadow:
+    0 12px 48px rgba(251, 191, 36, 0.22),
+    inset 0 1px 0 rgba(252, 211, 77, 0.15);
+  transform: translateY(-3px);
+}
+
+/* glowing left border */
+.rapport-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 12%;
+  bottom: 12%;
+  width: 4px;
+  border-radius: 0 4px 4px 0;
+  transition: all 0.35s ease;
+}
+
+.rapport-card.published::before {
+  background: linear-gradient(180deg, #4ade80, #22c55e);
+  box-shadow: 0 0 16px rgba(74, 222, 128, 0.8);
+}
+
+.rapport-card.draft::before {
+  background: linear-gradient(180deg, #fcd34d, #f59e0b);
+  box-shadow: 0 0 16px rgba(252, 211, 77, 0.8);
+}
+
+.rapport-card:hover::before {
+  top: 6%;
+  bottom: 6%;
+}
+
+/* shimmer on hover */
+.rapport-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.04) 50%,
+    transparent 60%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+/* ── Author read-only input ── */
+.input-readonly {
+  cursor: default;
+  opacity: 0.6;
+  border-color: rgba(255, 255, 255, 0.05) !important;
+  background: rgba(255, 255, 255, 0.03) !important;
+}
+
+.author-badge {
+  margin-left: 8px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgba(180, 160, 255, 0.6);
+  background: rgba(180, 160, 255, 0.1);
+  border: 1px solid rgba(180, 160, 255, 0.2);
+  border-radius: 6px;
+  padding: 2px 7px;
+  vertical-align: middle;
+}
+.rapport-card:hover::after {
+  transform: translateX(100%);
+}
+
+.rapport-card-left {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+/* ─── ICON ─── */
+.rapport-icon {
+  font-size: 22px;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.rapport-card:hover .rapport-icon {
+  transform: scale(1.12) rotate(-5deg);
+}
+
+.rapport-icon.published {
+  background: rgba(34, 197, 94, 0.2);
+  border: 1px solid rgba(34, 197, 94, 0.4);
+  box-shadow: 0 0 20px rgba(34, 197, 94, 0.2);
+}
+
+.rapport-icon.draft {
+  background: rgba(251, 191, 36, 0.2);
+  border: 1px solid rgba(251, 191, 36, 0.4);
+  box-shadow: 0 0 20px rgba(251, 191, 36, 0.2);
+}
+
+.rapport-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 0 0 6px;
+  letter-spacing: -0.2px;
+  transition: color 0.2s;
+}
+
+.rapport-card.published .rapport-title {
+  color: #d1fae5;
+}
+
+.rapport-card.draft .rapport-title {
+  color: #fef9c3;
+}
+
+.rapport-meta {
+  font-size: 13px;
+  margin: 0;
+}
+
+.rapport-card.published .rapport-meta {
+  color: rgba(167, 243, 208, 0.8);
+}
+
+.rapport-card.draft .rapport-meta {
+  color: rgba(253, 230, 138, 0.8);
+}
+
+/* ─── CARD RIGHT ─── */
+.rapport-card-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* ─── STATUS BADGE ─── */
+.status-badge {
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.status-badge.published {
+  background: rgba(34, 197, 94, 0.2);
+  color: #6ee7b7;
+  border: 1px solid rgba(34, 197, 94, 0.4);
+  box-shadow: 0 0 16px rgba(34, 197, 94, 0.2);
+}
+
+.status-badge.draft {
+  background: rgba(251, 191, 36, 0.2);
+  color: #fde68a;
+  border: 1px solid rgba(251, 191, 36, 0.4);
+  box-shadow: 0 0 16px rgba(251, 191, 36, 0.15);
+}
+
+/* ─── EDIT BUTTON ─── */
+.btn-edit {
+  padding: 8px 16px;
+  border-radius: 9px;
+  background: rgba(139, 92, 246, 0.15);
+  border: 1px solid rgba(167, 139, 250, 0.35);
+  color: rgba(220, 210, 255, 0.9);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.btn-edit:hover {
+  border-color: rgba(167, 139, 250, 0.65);
+  color: #fff;
+  background: rgba(139, 92, 246, 0.28);
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.25);
+  transform: translateY(-1px);
+}
+
+/* ─── DELETE BUTTON ─── */
+.btn-delete {
+  padding: 8px 16px;
+  border-radius: 9px;
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: rgba(252, 165, 165, 0.9);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.btn-delete:hover {
+  border-color: rgba(239, 68, 68, 0.6);
+  color: #fff;
+  background: rgba(239, 68, 68, 0.22);
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.2);
+  transform: translateY(-1px);
+}
+
+/* ─── FORM CARD ─── */
+.form-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(180, 160, 255, 0.1);
+  border-radius: 20px;
+  padding: 36px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  box-shadow: 0 0 60px rgba(120, 80, 255, 0.06);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group.full {
+  grid-column: 1 / -1;
+}
+
+label {
+  font-size: 11px;
+  color: rgba(200, 185, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  font-weight: 700;
+}
+
+input[type="text"],
+textarea {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 13px 16px;
+  color: white;
+  font-size: 15px;
+  font-family: "Segoe UI", sans-serif;
+  outline: none;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+input[type="text"]::placeholder,
+textarea::placeholder {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+input[type="text"]:focus,
+textarea:focus {
+  border-color: rgba(167, 139, 250, 0.5);
+  background: rgba(167, 139, 250, 0.06);
+  box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.08);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 280px;
+  line-height: 1.7;
+}
+
+/* ─── CHAR COUNTER ─── */
+.textarea-wrap {
+  position: relative;
+}
+
+.char-count {
+  position: absolute;
+  bottom: 12px;
+  right: 14px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.3);
+  pointer-events: none;
+}
+
+/* ─── DIVIDER ─── */
+.form-divider {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ─── FORM ACTIONS ─── */
+.form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.btn-cancel {
+  padding: 11px 22px;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-cancel:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: white;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.btn-submit {
+  padding: 11px 26px;
+  border-radius: 10px;
+  background: linear-gradient(
+    135deg,
+    rgba(139, 92, 246, 0.4),
+    rgba(167, 139, 250, 0.25)
+  );
+  border: 1px solid rgba(167, 139, 250, 0.45);
+  color: rgba(220, 210, 255, 0.95);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(139, 92, 246, 0.15);
+}
+
+.btn-submit:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(139, 92, 246, 0.55),
+    rgba(167, 139, 250, 0.4)
+  );
+  border-color: rgba(167, 139, 250, 0.65);
+  box-shadow: 0 6px 28px rgba(139, 92, 246, 0.3);
+  transform: translateY(-1px);
+}
+
+/* ─── STATUS TOGGLE ─── */
+.status-group {
+  display: flex;
+  gap: 10px;
+}
+
+.status-option {
+  display: none;
+}
+
+.status-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 18px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.25s;
+  font-weight: 500;
+}
+
+.status-label:hover {
+  border-color: rgba(167, 139, 250, 0.3);
+  color: rgba(200, 185, 255, 0.8);
+}
+
+.status-option:checked + .status-label {
+  border-color: rgba(167, 139, 250, 0.5);
+  background: rgba(139, 92, 246, 0.15);
+  color: rgba(220, 210, 255, 0.95);
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.15);
+}
+
+/* ─── EMPTY STATE ─── */
+.empty-msg {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.4);
+  margin-top: 80px;
+  font-size: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.empty-msg::before {
+  content: "📭";
+  font-size: 44px;
+  opacity: 0.5;
+}

@@ -1,0 +1,356 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Form Container ── */
+.form-container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  margin-top: 15px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 20px;
+  padding: 48px 44px;
+  backdrop-filter: blur(20px);
+  animation: fadeUp 0.5s ease both;
+}
+
+/* ── Header ── */
+.form-container h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 6px;
+  line-height: 1.2;
+}
+
+.form-subtitle {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.3);
+  margin-bottom: 28px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+/* ── Section Labels ── */
+.form-section-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(180, 160, 255, 0.6);
+  margin-bottom: 14px;
+  margin-top: 4px;
+}
+
+/* ── Input Row (2 columns) ── */
+.input-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* ── Input Group ── */
+.input-group {
+  margin-bottom: 16px;
+  animation: fadeUp 0.4s ease both;
+}
+
+.input-group label {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+  margin-bottom: 8px;
+  transition: color 0.2s;
+}
+
+.input-group:focus-within label {
+  color: rgba(180, 160, 255, 0.9);
+}
+
+.input-group input[type="number"],
+.input-group input[type="text"],
+.input-group input[type="date"] {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  color: white;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  padding: 12px 14px;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  -moz-appearance: textfield;
+}
+
+.input-group input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.5);
+  cursor: pointer;
+}
+
+.input-group input::-webkit-outer-spin-button,
+.input-group input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+.input-group input::placeholder {
+  color: rgba(255, 255, 255, 0.15);
+}
+
+.input-group input:focus {
+  border-color: rgba(180, 160, 255, 0.5);
+  background: rgba(180, 160, 255, 0.06);
+  box-shadow: 0 0 0 3px rgba(180, 160, 255, 0.08);
+}
+
+/* ── Shift Selector ── */
+.shift-selector {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.shift-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 10px 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.18s;
+}
+
+.shift-btn:hover {
+  border-color: rgba(180, 160, 255, 0.35);
+  background: rgba(180, 160, 255, 0.06);
+}
+
+.shift-btn.active {
+  background: rgba(180, 160, 255, 0.15);
+  border-color: rgba(180, 160, 255, 0.5);
+  box-shadow: 0 0 16px rgba(180, 160, 255, 0.1);
+}
+
+.shift-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: white;
+}
+
+.shift-time {
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.04em;
+}
+
+.shift-btn.active .shift-time {
+  color: rgba(180, 160, 255, 0.7);
+}
+
+/* ── Auto-set field note ── */
+.auto-field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(110, 231, 183, 0.06);
+  border: 1px solid rgba(110, 231, 183, 0.15);
+  border-radius: 8px;
+  padding: 9px 14px;
+  margin-bottom: 16px;
+}
+
+.auto-label {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(110, 231, 183, 0.5);
+}
+
+.auto-value {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  color: rgba(110, 231, 183, 0.8);
+  font-weight: 500;
+}
+
+/* ── Line State Selector ── */
+.state-selector {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.state-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 14px 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.18s;
+  text-align: center;
+}
+
+.state-btn:hover {
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.state-icon {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.state-label {
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: white;
+}
+
+.state-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* Running */
+.state-btn.state-running:hover,
+.state-btn.state-running.active {
+  border-color: rgba(110, 231, 183, 0.5);
+  background: rgba(110, 231, 183, 0.08);
+  box-shadow: 0 0 16px rgba(110, 231, 183, 0.08);
+}
+.state-btn.state-running .state-icon { color: #6ee7b7; }
+
+/* Blocked */
+.state-btn.state-blocked:hover,
+.state-btn.state-blocked.active {
+  border-color: rgba(248, 113, 113, 0.5);
+  background: rgba(248, 113, 113, 0.08);
+  box-shadow: 0 0 16px rgba(248, 113, 113, 0.08);
+}
+.state-btn.state-blocked .state-icon { color: #f87171; }
+
+/* Maintenance */
+.state-btn.state-maintenance:hover,
+.state-btn.state-maintenance.active {
+  border-color: rgba(251, 191, 36, 0.5);
+  background: rgba(251, 191, 36, 0.08);
+  box-shadow: 0 0 16px rgba(251, 191, 36, 0.08);
+}
+.state-btn.state-maintenance .state-icon { color: #fbbf24; }
+
+/* ── Divider ── */
+.form-divider {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  margin: 4px 0 20px;
+}
+
+/* ── Submit Button ── */
+.submit-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 14px;
+  background: rgba(180, 160, 255, 0.15);
+  border: 1px solid rgba(180, 160, 255, 0.3);
+  border-radius: 10px;
+  color: rgba(220, 210, 255, 0.95);
+  font-family: 'Syne', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s, transform 0.1s;
+}
+
+.submit-btn:hover {
+  background: rgba(180, 160, 255, 0.25);
+  border-color: rgba(180, 160, 255, 0.55);
+  box-shadow: 0 0 24px rgba(180, 160, 255, 0.15);
+}
+
+.submit-btn:active {
+  transform: scale(0.99);
+}
+
+/* ── Toast ── */
+.kpi-toast {
+  position: fixed;
+  top: 24px;
+  right: 28px;
+  z-index: 999;
+  padding: 14px 22px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  animation: toastIn 0.3s ease;
+}
+
+.kpi-toast.success {
+  background: rgba(34, 197, 94, 0.15);
+  border: 1px solid rgba(34, 197, 94, 0.4);
+  color: #6ee7b7;
+  box-shadow: 0 0 30px rgba(34, 197, 94, 0.15);
+}
+
+.kpi-toast.error {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #fca5a5;
+  box-shadow: 0 0 30px rgba(239, 68, 68, 0.15);
+}
+/* Locked shift button */
+.shift-btn--locked {
+  opacity: 0.45;
+  cursor: not-allowed;
+  background: #1a1a1a;
+  border-color: #333;
+  position: relative;
+}
+
+.shift-btn--locked .shift-num,
+.shift-btn--locked .shift-time {
+  text-decoration: line-through;
+}
+
+.shift-lock-badge {
+  display: block;
+  font-size: 0.65rem;
+  margin-top: 4px;
+  color: #4caf50;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+/* ── Animations ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

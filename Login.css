@@ -1,0 +1,322 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Inter', sans-serif;
+  background: #07060f;
+  overflow: hidden;
+}
+
+/* ── Background blobs (same as home) ── */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.18;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::before {
+  width: 500px;
+  height: 500px;
+  background: rgba(180, 160, 255, 0.9);
+  top: -100px;
+  left: -100px;
+  animation: floatBlob 12s ease-in-out infinite;
+}
+
+body::after {
+  width: 400px;
+  height: 400px;
+  background: rgba(100, 100, 255, 0.9);
+  bottom: -100px;
+  right: -100px;
+  animation: floatBlob 10s ease-in-out infinite 3s;
+}
+
+@keyframes floatBlob {
+  0%   { transform: translate(0px, 0px) scale(1); }
+  33%  { transform: translate(30px, -30px) scale(1.05); }
+  66%  { transform: translate(-20px, 20px) scale(0.95); }
+  100% { transform: translate(0px, 0px) scale(1); }
+}
+
+/* ── Navbar ── */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 18px 40px;
+  background: rgba(7, 6, 15, 0.5);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  animation: slideDown 0.6s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  color: white;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.nav-logo::after {
+  content: ' ®';
+  font-size: 11px;
+  color: rgba(180, 160, 255, 0.6);
+  vertical-align: super;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 6px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.nav-item:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: white;
+  transform: translateY(-1px);
+}
+
+.nav-icon { font-size: 18px; }
+
+/* ── Login Container ── */
+.login-container {
+  position: relative;
+  z-index: 1;
+  margin: auto;
+  margin-top: 60px;
+  margin-bottom: 60px;
+  width: 100%;
+  max-width: 420px;
+  padding: 48px 40px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  animation: fadeUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.1s both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Text container ── */
+.text-container {
+  width: 100%;
+  margin-bottom: 28px;
+  animation: fadeUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
+}
+
+.logintext {
+  font-family: 'Syne', sans-serif;
+  color: white;
+  font-size: 24px;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.logintext span {
+  background: linear-gradient(
+    90deg,
+    rgba(180, 160, 255, 0.9) 0%,
+    rgba(220, 210, 255, 1) 50%,
+    rgba(180, 160, 255, 0.9) 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s ease-in-out 1s infinite;
+}
+
+@keyframes shimmer {
+  0%   { background-position: 0% center; }
+  50%  { background-position: 100% center; }
+  100% { background-position: 0% center; }
+}
+
+/* ── Input Box ── */
+.input-box {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 4px 14px;
+  gap: 10px;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  animation: fadeUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both;
+}
+
+.input-box:focus-within {
+  border-color: rgba(180, 160, 255, 0.5);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 0 3px rgba(180, 160, 255, 0.08);
+}
+
+.input-box .icon {
+  color: rgba(180, 160, 255, 0.5);
+  font-size: 18px;
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+
+.input-box:focus-within .icon {
+  color: rgba(180, 160, 255, 0.9);
+}
+
+.input-box input {
+  width: 100%;
+  padding: 14px 4px;
+  border: none;
+  background: transparent;
+  color: white;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  outline: none;
+}
+
+.input-box input::placeholder {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+/* ── Forgot password ── */
+.Lost-pass {
+  width: 100%;
+  margin-bottom: 6px;
+  animation: fadeUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.35s both;
+}
+
+.Lost-pass p {
+  text-align: right;
+  font-size: 12px;
+  color: rgba(180, 160, 255, 0.6);
+}
+
+.Click-link {
+  color: rgba(180, 160, 255, 0.8);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.Click-link:hover {
+  color: white;
+}
+
+/* ── Submit Button ── */
+.submit-btn {
+  width: 100%;
+  padding: 13px;
+  margin-top: 8px;
+  border: 1px solid rgba(180, 160, 255, 0.3);
+  border-radius: 10px;
+  background: rgba(180, 160, 255, 0.15);
+  color: rgba(220, 210, 255, 0.95);
+  font-family: 'Syne', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+  animation: fadeUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both;
+}
+
+.submit-btn:hover {
+  background: rgba(180, 160, 255, 0.25);
+  border-color: rgba(180, 160, 255, 0.6);
+  box-shadow: 0 0 28px rgba(180, 160, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.submit-btn:active {
+  transform: scale(0.98);
+}
+
+/* ── Divider ── */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0;
+  width: 100%;
+  animation: fadeUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.45s both;
+}
+
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.divider-text {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+}
+
+
+/* ── Signup text ── */
+.signup-text {
+  text-align: center;
+  margin-top: 20px;
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 13px;
+  width: 100%;
+  animation: fadeUp 0.5s cubic-bezier(0.4, 0, 0.2, 1) 0.55s both;
+}
+
+.signup-link {
+  color: rgba(180, 160, 255, 0.8);
+  cursor: pointer;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+
+.signup-link:hover {
+  color: white;
+  text-decoration: underline;
+}
